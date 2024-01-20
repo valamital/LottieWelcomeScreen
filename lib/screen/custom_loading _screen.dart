@@ -19,27 +19,33 @@ class _MyWidgetState extends State<CustomLoadingScreen> {
 
   Future<void> _loadLottieAnimation() async {
     _composition = NetworkLottie(
-      "https://lottie.host/8e87a7a0-57a8-404b-ac5f-5604cbbbfe1e/9yrq9FhjMN.json",
+      "https://lottie.host/0ad73d36-6d68-448c-89d7-b9a920dc353b/uVPc78A6Rj.json",
     ).load();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        FutureBuilder<LottieComposition>(
-          future: _composition,
-          builder: (context, snapshot) {
-            var composition = snapshot.data;
-            if (composition != null) {
-              return Lottie(composition: composition);
-            } else {
-              return const Center(child: CircularProgressIndicator());
-            }
-          },
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            FutureBuilder<LottieComposition>(
+              future: _composition,
+              builder: (context, snapshot) {
+                var composition = snapshot.data;
+                if (composition != null) {
+                  return Lottie(composition: composition, width: 250, // Set your desired width
+                      height: 250);
+                } else {
+                  return const Center(child: CircularProgressIndicator());
+                }
+              },
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }
